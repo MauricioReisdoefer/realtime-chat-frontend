@@ -7,6 +7,7 @@ class CreateUser extends StatelessWidget {
   Widget build(BuildContext context) {
     final TextEditingController nameController = TextEditingController();
     final TextEditingController passwordController = TextEditingController();
+    final TextEditingController emailController = TextEditingController();
 
     return Scaffold(
       appBar: AppBar(title: const Text('Criar Usuário'), centerTitle: true),
@@ -25,6 +26,22 @@ class CreateUser extends StatelessWidget {
                   decoration: const InputDecoration(
                     labelText: 'Nome',
                     prefixIcon: Icon(Icons.person),
+                  ),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+            Card(
+              elevation: 4,
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              child: Padding(
+                padding: const EdgeInsets.all(16),
+                child: TextField(
+                  controller: emailController,
+                  obscureText: true,
+                  decoration: const InputDecoration(
+                    labelText: 'Email',
+                    prefixIcon: Icon(Icons.mail),
                   ),
                 ),
               ),
