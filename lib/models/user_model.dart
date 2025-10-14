@@ -8,7 +8,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel{id: ${id}}';
+    return '<UserModel | id: ${id}>';
   }
 
   Map<String, dynamic> toMap() {
