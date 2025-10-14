@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:realtime_chat/connections/register_user.dart';
+import 'package:realtime_chat/models/user_model.dart';
 
 class CreateUser extends StatelessWidget {
   const CreateUser({super.key});
@@ -68,7 +70,16 @@ class CreateUser extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              onPressed: () {},
+              onPressed: () {
+                createUser(
+                  UserModel(
+                    id: 0,
+                    email: emailController.text,
+                    name: nameController.text,
+                    password: passwordController.text,
+                  ),
+                );
+              },
               child: const Text('Cadastrar', style: TextStyle(fontSize: 16)),
             ),
           ],
