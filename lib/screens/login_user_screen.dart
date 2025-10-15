@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:realtime_chat/connections/login_user.dart';
+import 'package:realtime_chat/screens/chat_screen.dart';
 import 'package:realtime_chat/screens/create_user_screen.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -52,11 +54,14 @@ class LoginScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 16),
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
-              onPressed: () {
+              onPressed: () async {
                 final email = emailController.text;
                 final password = passwordController.text;
 
-                debugPrint('Email: $email, Senha: $password');
+                final response = await loginUser(password: password, email: email);
+                if (response == true) {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ChatScreen()));
+                }
               },
               child: const Text('Entrar', style: TextStyle(fontSize: 16)),
             ),

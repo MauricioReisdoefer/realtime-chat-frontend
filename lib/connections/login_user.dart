@@ -1,14 +1,24 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:realtime_chat/models/user_model.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-Future<Map> loginUser(UserModel user_model) async {
+Future<bool> loginUser({required String email, required String password}) async {
   final response = await http.post(
     Uri.parse("http://127.0.0.1:5000/user/login"),
     headers: {'Content-Type': 'application/json'},
-    body: jsonEncode({"password": user_model.password, "email": user_model.email}),
+    body: jsonEncode({"password": password, "email": email}),
   );
-  final bodyDecoded = jsonDecode(response.body);
-  return bodyDecoded;
+
+  if (response.statusCode == 200) {
+    final bodyDecoded = jsonDecode(response.body);
+
+    if (bodyDecoded.containsKey('access_token')) {
+      final prefs = await SharedPreferences.getInstance();
+      await prefs.setString('access_token', bodyDecoded['access_token']);
+      return true;
+    }
+  }
+
+  return false;
 }
