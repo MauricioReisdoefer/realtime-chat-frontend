@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:realtime_chat/screens/create_user_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   const LoginScreen({super.key});
@@ -60,8 +61,20 @@ class LoginScreen extends StatelessWidget {
               child: const Text('Entrar', style: TextStyle(fontSize: 16)),
             ),
             const SizedBox(height: 16),
-            TextButton(onPressed: () {}, child: const Text('Criar uma conta')),
           ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(16),
+        child: SizedBox(
+          height: 50,
+          width: double.infinity,
+          child: TextButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) => CreateUser()));
+            },
+            child: Text("Criar uma Conta"),
+          ),
         ),
       ),
     );

@@ -91,11 +91,11 @@ class CreateUser extends StatelessWidget {
         child: SizedBox(
           height: 50,
           width: double.infinity,
-          child: IconButton(
+          child: TextButton(
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
             },
-            icon: Icon(Icons.login),
+            child: Text("Fazer login"),
           ),
         ),
       ),
