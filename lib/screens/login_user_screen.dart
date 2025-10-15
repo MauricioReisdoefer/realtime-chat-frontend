@@ -1,19 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:realtime_chat/connections/register_user.dart';
-import 'package:realtime_chat/models/user_model.dart';
-import 'package:realtime_chat/screens/login_user_screen.dart';
 
-class CreateUser extends StatelessWidget {
-  const CreateUser({super.key});
+class LoginScreen extends StatelessWidget {
+  const LoginScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController nameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
     final TextEditingController emailController = TextEditingController();
+    final TextEditingController passwordController = TextEditingController();
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Criar Usuário'), centerTitle: true),
+      appBar: AppBar(title: const Text('Login'), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -25,23 +21,7 @@ class CreateUser extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: TextField(
-                  controller: nameController,
-                  decoration: const InputDecoration(
-                    labelText: 'Nome',
-                    prefixIcon: Icon(Icons.person),
-                  ),
-                ),
-              ),
-            ),
-            const SizedBox(height: 20),
-            Card(
-              elevation: 4,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              child: Padding(
-                padding: const EdgeInsets.all(16),
-                child: TextField(
                   controller: emailController,
-                  obscureText: true,
                   decoration: const InputDecoration(
                     labelText: 'Email',
                     prefixIcon: Icon(Icons.mail),
@@ -72,31 +52,16 @@ class CreateUser extends StatelessWidget {
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
               ),
               onPressed: () {
-                createUser(
-                  UserModel(
-                    id: 0,
-                    email: emailController.text,
-                    name: nameController.text,
-                    password: passwordController.text,
-                  ),
-                );
+                final email = emailController.text;
+                final password = passwordController.text;
+
+                debugPrint('Email: $email, Senha: $password');
               },
-              child: const Text('Cadastrar', style: TextStyle(fontSize: 16)),
+              child: const Text('Entrar', style: TextStyle(fontSize: 16)),
             ),
+            const SizedBox(height: 16),
+            TextButton(onPressed: () {}, child: const Text('Criar uma conta')),
           ],
-        ),
-      ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: SizedBox(
-          height: 50,
-          width: double.infinity,
-          child: IconButton(
-            onPressed: () {
-              Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
-            },
-            icon: Icon(Icons.login),
-          ),
         ),
       ),
     );
